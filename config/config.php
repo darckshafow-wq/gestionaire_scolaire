@@ -20,6 +20,6 @@
 
 // --- Paramètres de connexion MySQL ---
 define('DB_HOST', 'localhost');           // Serveur de base de données
-define('DB_USER', 'admin_scolaire');      // Nom d'utilisateur MySQL
+define('DB_USER', 'admin');               // Nom d'utilisateur MySQL
 define('DB_PASS', 'admin123');            // Mot de passe MySQL
 define('DB_NAME', 'gestion_scolaire');    // Nom de la base de données

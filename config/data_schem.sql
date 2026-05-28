@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS etudiants (
     tuteur_contact VARCHAR(50) NOT NULL,
     date_naissance DATE NOT NULL,
     annee_scolaire VARCHAR(20) NOT NULL,
-    statut VARCHAR(200) DEFAULT 'en attente'
+    statut VARCHAR(200) DEFAULT 'en attente',
     created_by INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (created_by) REFERENCES administrateurs(id) ON DELETE SET NULL

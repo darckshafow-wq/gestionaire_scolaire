@@ -54,7 +54,7 @@ class Admin
      */
     public function getAll()
     {
-        $query = "SELECT id, pseudo, email, date_creation FROM administrateurs ORDER BY date_creation DESC";
+        $query = "SELECT id, pseudo, email, created_at FROM administrateurs ORDER BY created_at DESC";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 

@@ -1,10 +1,10 @@
 USE gestion_scolaire;
 
 -- Vidage des tables (Optionnel, au cas où)
--- SET FOREIGN_KEY_CHECKS = 0;
--- TRUNCATE TABLE etudiants;
--- TRUNCATE TABLE administrateurs;
--- SET FOREIGN_KEY_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE etudiants;
+TRUNCATE TABLE administrateurs;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- Insertion de faux administrateurs
 -- Mots de passe hashés (ex: 'password123')
