@@ -1,0 +1,13 @@
+# Fichiers de configuration IDE
+/.vscode/
+/.idea/
+
+# Dépendances (si vous utilisez Composer plus tard)
+/vendor/
+
+# Fichiers MacOS / OS de bureau
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
