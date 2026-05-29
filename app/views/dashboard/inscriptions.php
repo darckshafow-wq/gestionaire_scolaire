@@ -1,4 +1,11 @@
-<?php $error = $error ?? null; ?>
+<?php
+/**
+ * VUE : Nouvelle Inscription
+ */
+$admin_pseudo = $admin_pseudo ?? 'Admin';
+$error = $error ?? null;
+$filieres = $filieres ?? []; // Liste des filières transmise par le contrôleur
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,7 +19,7 @@
     <div class="dashboard-layout">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo" id="sidebar-logo-toggle">
-                <img src="/assets/images/logo_epi.svg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+                <img src="/assets/images/logo.jpg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
                 <span class="brand-font">EPI Gest</span>
             </div>
 
@@ -32,9 +39,9 @@
             </ul>
 
             <div class="sidebar-profile">
-                <div class="avatar" style="width:36px;height:36px;font-size:0.9rem;">A</div>
+                <div class="avatar" style="width:36px;height:36px;font-size:0.9rem;"><?= strtoupper(substr($admin_pseudo, 0, 1)) ?></div>
                 <div class="profile-info">
-                    <span class="profile-name">Admin</span>
+                    <span class="profile-name"><?= htmlspecialchars($admin_pseudo) ?></span>
                     <span class="profile-role">Administrateur</span>
                 </div>
             </div>
@@ -50,16 +57,16 @@
 
             <div class="inscription-wrapper">
                 <div class="detail-card">
-                    <?php if (isset($error)): ?>
+                    <?php if ($error): ?>
                         <div style="background-color:#fee2e2;color:#b91c1c;padding:1rem;border-radius:var(--radius-md);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;border-left:4px solid #ef4444;">
                             <i class="ph-fill ph-warning-circle" style="font-size:1.25rem;"></i>
-                            <?php echo htmlspecialchars($error); ?>
+                            <?= htmlspecialchars($error); ?>
                         </div>
                     <?php endif; ?>
 
                     <form action="/inscriptions" method="POST">
                         <h3 style="margin-bottom:1.5rem;color:var(--text-main);font-family:'Outfit';font-size:1.25rem;display:flex;align-items:center;gap:0.5rem;">
-                            <i class="ph-fill ph-student" style="color:var(--epi-blue);"></i> Informations de l'étudiant
+                            <i class="ph-fill ph-student" style="color:var(--primary-color);"></i> Informations de l'étudiant
                         </h3>
 
                         <div class="grid-2">
@@ -79,7 +86,18 @@
                                 <label>Année Scolaire</label>
                                 <input type="text" name="annee_scolaire" value="2026-2027" required>
                             </div>
-                            <div class="form-group" style="grid-column:span 2;">
+                            
+                            <div class="form-group">
+                                <label>Filière</label>
+                                <select name="filiere_id" required style="width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); font-family: 'Inter'; background-color: white; outline: none;">
+                                    <option value="" disabled selected>Choisir une filière...</option>
+                                    <?php foreach ($filieres as $filiere): ?>
+                                        <option value="<?= $filiere['id'] ?>"><?= htmlspecialchars($filiere['nom']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Date de naissance</label>
                                 <input type="date" name="date_naissance" required>
                             </div>
@@ -88,7 +106,7 @@
                         <div style="height:1px;background:var(--border-color);margin:2rem 0;"></div>
 
                         <h3 style="margin-bottom:1.5rem;color:var(--text-main);font-family:'Outfit';font-size:1.25rem;display:flex;align-items:center;gap:0.5rem;">
-                            <i class="ph-fill ph-users" style="color:var(--epi-blue);"></i> Informations du tuteur
+                            <i class="ph-fill ph-users" style="color:var(--primary-color);"></i> Informations du tuteur
                         </h3>
 
                         <div class="grid-2">
@@ -103,8 +121,8 @@
                         </div>
 
                         <div style="margin-top:2rem;display:flex;justify-content:flex-end;gap:1rem;">
-                            <button type="reset" class="btn-light" style="padding:0.75rem 1.25rem;border-radius:var(--radius-md);">Annuler</button>
-                            <button type="submit" class="btn" id="btn-inscrire" style="background:linear-gradient(135deg,var(--epi-blue),#1e40af);">
+                            <button type="reset" class="btn-light" style="padding:0.75rem 1.25rem;border-radius:var(--radius-md); cursor: pointer;">Annuler</button>
+                            <button type="submit" class="btn" id="btn-inscrire" style="background:linear-gradient(135deg, var(--primary-color), #1e40af); display: inline-flex; align-items: center; gap: 0.5rem;">
                                 <i class="ph ph-floppy-disk"></i> Enregistrer l'inscription
                             </button>
                         </div>

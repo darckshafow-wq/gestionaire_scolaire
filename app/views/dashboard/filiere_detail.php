@@ -18,7 +18,7 @@ $error        = $error ?? null;
     <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-logo" id="sidebar-logo-toggle">
-            <img src="/assets/images/logo_epi.svg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+            <img src="/assets/images/logo.jpg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
             <span class="brand-font">EPI Gest</span>
         </div>
 
@@ -140,13 +140,6 @@ $error        = $error ?? null;
                 <div style="height:1px;background:var(--border-color);margin:1.5rem 0;"></div>
 
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <!-- Supprimer -->
-                    <form action="/filiere_delete" method="POST" onsubmit="return confirm('Supprimer définitivement cette filière ?');">
-                        <input type="hidden" name="id" value="<?= $filiere['id'] ?>">
-                        <button type="submit" style="background:#fee2e2;color:#dc2626;border:none;cursor:pointer;padding:0.75rem 1.25rem;border-radius:var(--radius-md);font-size:0.9rem;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s;font-weight:500;">
-                            <i class="ph ph-trash"></i> Supprimer cette filière
-                        </button>
-                    </form>
                     <!-- Sauvegarder -->
                     <div style="display:flex;gap:1rem;">
                         <a href="/filieres" class="btn-light" style="padding:0.75rem 1.25rem;border-radius:var(--radius-md);display:inline-flex;align-items:center;gap:0.4rem;">Annuler</a>
@@ -154,6 +147,16 @@ $error        = $error ?? null;
                     </div>
                 </div>
             </form>
+
+            <!-- Bouton supprimer HORS du formulaire de modification -->
+            <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border-color);">
+                <form action="/filiere_delete" method="POST" onsubmit="return confirm('Supprimer définitivement cette filière ?');">
+                    <input type="hidden" name="id" value="<?= $filiere['id'] ?>">
+                    <button type="submit" style="background:#fee2e2;color:#dc2626;border:none;cursor:pointer;padding:0.75rem 1.25rem;border-radius:var(--radius-md);font-size:0.9rem;display:inline-flex;align-items:center;gap:0.4rem;transition:background 0.2s;font-weight:500;">
+                        <i class="ph ph-trash"></i> Supprimer cette filière
+                    </button>
+                </form>
+            </div>
         </div>
 
         <!-- Infos système -->

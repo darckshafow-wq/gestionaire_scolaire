@@ -1,14 +1,7 @@
 <?php
-/**
- * TODO:
- * - Intégrer une librairie JS (ex: FullCalendar) pour la page calendrier
- * - Gérer la sauvegarde des paramètres en BDD
- * - Ajouter un middleware pour vérifier $_SESSION['admin_id'] sur toutes les routes dashboard
- * - Brancher le StudentController complet
- */
-
 require_once ROOT_PATH . '/app/models/Etudiant.php';
 require_once ROOT_PATH . '/app/models/Admin.php';
+require_once ROOT_PATH . '/app/models/Filiere.php'; 
 
 class DashboardController extends Controller
 {
@@ -29,10 +22,10 @@ class DashboardController extends Controller
 
         $listAdmins = $adminModel->getAll();
         $totalAdmins = count($listAdmins);
-
         $totalEtudiants = $etudiantModel->countAll();
-        $tousEtudiants = $etudiantModel->getAll();
 
+        // Récupère les étudiants avec leur filière via le LEFT JOIN du modèle
+        $tousEtudiants = $etudiantModel->getAll();
         $derniersEtudiants = array_slice($tousEtudiants, 0, 5);
 
         $data = [
@@ -40,10 +33,11 @@ class DashboardController extends Controller
             'total_etudiants' => $totalEtudiants,
             'total_admins'    => $totalAdmins,
             'list_admins'     => $listAdmins,
-            'etudiants'       => $derniersEtudiants
+            'etudiants'       => $derniersEtudiants,
+            'filieres'        => $etudiantModel->getStatsParFiliere() // Stats dynamiques ok
         ];
 
+        // CORRECTION : On pointe vers 'dashboard/index' pour éviter l'erreur Failed opening required
         $this->view('dashboard/index', $data);
     }
-
 }

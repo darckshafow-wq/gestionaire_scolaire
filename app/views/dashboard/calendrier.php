@@ -1,3 +1,6 @@
+<?php
+$admin_pseudo = $admin_pseudo ?? 'Admin';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,46 +12,36 @@
 </head>
 <body>
     <div class="dashboard-layout">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-logo" id="sidebar-logo-toggle">
-                <span style="font-size: 2rem; color: var(--accent-indigo);"><i class="ph-fill ph-graduation-cap"></i></span> 
-                <span class="brand-font">EduGest Pro</span>
-            </div>
-            
-            <div class="sidebar-section-title">Main</div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/dashboard" class="nav-link" title="Vue d'ensemble"><i class="ph ph-house" style="font-size: 1.25rem;"></i> <span>Vue d'ensemble</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="/etudiants" class="nav-link" title="Registre Étudiants"><i class="ph ph-users" style="font-size: 1.25rem;"></i> <span>Registre Étudiants</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="/inscriptions" class="nav-link" title="Inscriptions"><i class="ph ph-file-text" style="font-size: 1.25rem;"></i> <span>Inscriptions</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="/calendrier" class="nav-link active" title="Calendrier"><i class="ph ph-calendar-blank" style="font-size: 1.25rem;"></i> <span>Calendrier</span></a>
-                </li>
-            </ul>
+            <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo" id="sidebar-logo-toggle">
+            <img src="/assets/images/logo.jpg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+            <span class="brand-font">EPI Gest</span>
+        </div>
 
-            <div class="sidebar-section-title">Système</div>
-            <ul class="nav-menu" style="flex: 0;">
-                <li class="nav-item">
-                    <a href="/parametres" class="nav-link" title="Paramètres"><i class="ph ph-gear" style="font-size: 1.25rem;"></i> <span>Paramètres</span></a>
-                </li>
-                <li class="nav-item">
-                    <a href="/logout" class="nav-link nav-link-danger" title="Déconnexion"><i class="ph ph-sign-out" style="font-size: 1.25rem;"></i> <span>Déconnexion</span></a>
-                </li>
-            </ul>
+        <div class="sidebar-section-title">Main</div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="/dashboard" class="nav-link" title="Vue d'ensemble"><i class="ph ph-house" style="font-size:1.25rem;"></i><span>Vue d'ensemble</span></a></li>
+            <li class="nav-item"><a href="/etudiants" class="nav-link" title="Registre Étudiants"><i class="ph ph-users" style="font-size:1.25rem;"></i><span>Registre Étudiants</span></a></li>
+            <li class="nav-item"><a href="/inscriptions" class="nav-link" title="Inscriptions"><i class="ph ph-file-text" style="font-size:1.25rem;"></i><span>Inscriptions</span></a></li>
+            <li class="nav-item"><a href="/filieres" class="nav-link" title="Filières"><i class="ph ph-books" style="font-size:1.25rem;"></i><span>Filières</span></a></li>
+            <li class="nav-item"><a href="/calendrier" class="nav-link active" title="Calendrier"><i class="ph ph-calendar-blank" style="font-size:1.25rem;"></i><span>Calendrier</span></a></li>
+        </ul>
 
-            <div class="sidebar-profile">
-                <div class="avatar" style="width: 36px; height: 36px; font-size: 0.9rem;">A</div>
-                <div class="profile-info">
-                    <span class="profile-name">Admin</span>
-                    <span class="profile-role">Administrateur</span>
-                </div>
+        <div class="sidebar-section-title">Système</div>
+        <ul class="nav-menu" style="flex:0;">
+            <li class="nav-item"><a href="/parametres" class="nav-link" title="Paramètres"><i class="ph ph-gear" style="font-size:1.25rem;"></i><span>Paramètres</span></a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link nav-link-danger" title="Déconnexion"><i class="ph ph-sign-out" style="font-size:1.25rem;"></i><span>Déconnexion</span></a></li>
+        </ul>
+
+        <div class="sidebar-profile">
+            <div class="avatar" style="width:36px;height:36px;font-size:0.9rem;"><?= strtoupper(substr($admin_pseudo, 0, 1)) ?></div>
+            <div class="profile-info">
+                <span class="profile-name"><?= htmlspecialchars($admin_pseudo) ?></span>
+                <span class="profile-role">Administrateur</span>
             </div>
-        </aside>
+        </div>
+    </aside>
 
         <main class="main-content">
             <header class="header">

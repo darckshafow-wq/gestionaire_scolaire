@@ -17,7 +17,7 @@ $filieres     = $filieres ?? [];
     <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-logo" id="sidebar-logo-toggle">
-            <img src="/assets/images/logo_epi.svg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+            <img src="/assets/images/logo.jpg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
             <span class="brand-font">EPI Gest</span>
         </div>
 

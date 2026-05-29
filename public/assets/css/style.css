@@ -53,7 +53,13 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6, .brand-font {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.brand-font {
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -123,7 +129,9 @@ a {
     color: var(--text-muted);
 }
 
-.form-group input, .form-group select, .form-group textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 1rem 1.25rem;
     border: 2px solid var(--border-color);
@@ -136,7 +144,8 @@ a {
     font-size: 0.95rem;
 }
 
-.form-group input:focus, .form-group select:focus {
+.form-group input:focus,
+.form-group select:focus {
     border-color: var(--primary-color);
     background: #ffffff;
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
@@ -164,7 +173,7 @@ a {
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(255,255,255,0) 70%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
     top: -200px;
     left: -200px;
     border-radius: 50%;
@@ -264,12 +273,22 @@ a {
     padding: 1rem 0.5rem 0;
     border-top: 1px solid var(--border-color);
 }
+
 .profile-info {
     display: flex;
     flex-direction: column;
 }
-.profile-name { font-weight: 600; font-size: 0.85rem; color: var(--text-main); }
-.profile-role { font-size: 0.75rem; color: var(--text-muted); }
+
+.profile-name {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+.profile-role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
 
 .sidebar-logo {
     font-family: 'Outfit', sans-serif;
@@ -329,6 +348,7 @@ a {
 .nav-link-danger {
     color: #ef4444;
 }
+
 .nav-link-danger:hover {
     background: #fef2f2;
     color: #dc2626;
@@ -453,8 +473,14 @@ a {
     color: var(--text-main);
     border: 1px solid var(--border-color);
 }
-.card.card-light h3 { color: var(--text-main); }
-.card.card-light p { color: var(--text-muted); }
+
+.card.card-light h3 {
+    color: var(--text-main);
+}
+
+.card.card-light p {
+    color: var(--text-muted);
+}
 
 /* Decorative circle in cards */
 .card::after {
@@ -515,7 +541,8 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     padding: 1.25rem 1.5rem;
     text-align: left;
     border-bottom: 1px solid var(--border-color);
@@ -552,11 +579,30 @@ td {
     display: inline-block;
 }
 
-.badge-blue { background: #e0f2fe; color: #0284c7; }
-.badge-green { background: #dcfce3; color: #166534; }
-.badge-yellow { background: #fef3c7; color: #d97706; }
-.badge-red { background: #fee2e2; color: #dc2626; }
-.badge-purple { background: #f3e8ff; color: #7e22ce; }
+.badge-blue {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+
+.badge-green {
+    background: #dcfce3;
+    color: #166534;
+}
+
+.badge-yellow {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.badge-red {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.badge-purple {
+    background: #f3e8ff;
+    color: #7e22ce;
+}
 
 /* -------------------------------------
    Detail Views / Forms Layout
@@ -628,7 +674,8 @@ td {
 .snackbar {
     visibility: hidden;
     min-width: 300px;
-    background: #10b981; /* Vert émeraude pour le succès */
+    background: #10b981;
+    /* Vert émeraude pour le succès */
     color: white;
     text-align: center;
     border-radius: var(--radius-md);
@@ -653,18 +700,49 @@ td {
 }
 
 @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
 }
+
 @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
 }
+
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
 }
+
 @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
 }

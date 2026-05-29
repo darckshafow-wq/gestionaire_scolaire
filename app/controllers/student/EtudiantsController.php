@@ -16,7 +16,19 @@ class EtudiantsController extends Controller
         $this->requireAuth();
 
         $etudiantModel = $this->model('Etudiant');
-        $data['etudiants'] = $etudiantModel->getAll();
+
+        $search = trim($_GET['search'] ?? '');
+
+        if (!empty($search)) {
+            $etudiants = $etudiantModel->search($search);
+        } else {
+            $etudiants = $etudiantModel->getAll();
+        }
+
+        $data = [
+            'admin_pseudo' => $_SESSION['admin_pseudo'] ?? 'Admin',
+            'etudiants'    => $etudiants,
+        ];
 
         $this->view('dashboard/etudiants', $data);
     }
