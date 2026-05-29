@@ -17,7 +17,7 @@
         <div class="auth-card">
             <!-- Logo EPI -->
             <div style="text-align:center;margin-bottom:2rem;">
-                <img src="/assets/images/logo_epi.svg" alt="Logo EPI"
+                <img src="/assets/images/logo.jpg" alt="Logo EPI"
                      style="width:90px;height:90px;border-radius:50%;border:3px solid var(--epi-blue-light);box-shadow:0 4px 20px rgba(0,48,135,0.18);margin-bottom:1rem;display:inline-block;">
                 <h2 style="margin-bottom:0.25rem;font-family:'Outfit';">Bienvenue</h2>
                 <p style="color:var(--text-muted);font-size:0.9rem;">Connectez-vous à votre espace administrateur</p>
