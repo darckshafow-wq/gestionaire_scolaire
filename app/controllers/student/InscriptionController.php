@@ -34,6 +34,7 @@ class InscriptionController extends Controller
                 $result = $etudiantModel->create($inputs);
 
                 if ($result) {
+                    $_SESSION['snackbar'] = "Nouvel étudiant inscrit avec succès !";
                     header('Location: /etudiants');
                     exit();
                 } else {

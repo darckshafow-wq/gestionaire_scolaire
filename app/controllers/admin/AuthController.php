@@ -64,6 +64,7 @@ class AuthController extends Controller
                     $_SESSION['admin_id'] = $admin['id'];
                     $_SESSION['admin_email'] = $admin['email'];
                     $_SESSION['admin_pseudo'] = $admin['pseudo'];
+                    $_SESSION['snackbar'] = "Connexion réussie. Bienvenue 👋 !";
 
                     header('Location: /dashboard');
                     exit();
