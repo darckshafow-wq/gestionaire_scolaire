@@ -12,23 +12,32 @@
     --accent-indigo: #4f46e5;
     --accent-sky: #0ea5e9;
     --border-color: #e2e8f0;
-    
+
+    /* EPI Brand Colors (École Polytechnique Internationale) */
+    --epi-blue: #003087;
+    --epi-blue-hover: #002060;
+    --epi-blue-light: #e8eef8;
+    --epi-red: #cc0000;
+    --epi-red-light: #fde8e8;
+    --epi-navy: #1a237e;
+
     /* Shadows & Effects */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    
+
     /* Radii */
     --radius-sm: 6px;
     --radius-md: 12px;
     --radius-lg: 20px;
     --radius-xl: 24px;
-    
+
     /* Transitions */
     --transition-fast: 0.15s ease;
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 
 * {
     margin: 0;
@@ -575,6 +584,25 @@ td {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 }
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Centered inscription form */
+.inscription-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.inscription-wrapper .detail-card {
+    width: 100%;
+    max-width: 860px;
+}
+
 
 .info-group {
     margin-bottom: 1.5rem;

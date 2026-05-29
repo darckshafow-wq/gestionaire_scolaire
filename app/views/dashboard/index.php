@@ -40,6 +40,7 @@ $admin_pseudo = $admin_pseudo ?? 'Admin';
                 <li class="nav-item">
                     <a href="/calendrier" class="nav-link" title="Calendrier"><i class="ph ph-calendar-blank" style="font-size: 1.25rem;"></i> <span>Calendrier</span></a>
                 </li>
+                 <li class="nav-item"><a href="/filieres" class="nav-link active" title="Filières"><i class="ph ph-books" style="font-size:1.25rem;"></i><span>Filières</span></a></li>
             </ul>
 
             <div class="sidebar-section-title">Système</div>

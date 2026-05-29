@@ -36,4 +36,9 @@ $router->add('/etudiants', 'student/EtudiantsController@index');
 $router->add('/inscriptions', 'student/InscriptionController@index');
 $router->add('/etudiant_detail', 'student/EtudiantDetailController@index');
 
+$router->add('/filieres', 'admin/FilieresController@index');
+$router->add('/filieres/create', 'admin/FilieresController@create');
+$router->add('/filiere_detail', 'admin/FilieresController@detail');
+$router->add('/filiere_delete', 'admin/FilieresController@delete');
+
 $router->dispatch($_SERVER['REQUEST_URI']);
