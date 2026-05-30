@@ -746,3 +746,26 @@ td {
         opacity: 0;
     }
 }
+
+/* Remplace les couleurs "Primary" dans tes composants clés */
+.btn {
+    /* Remplace le dégradé bleu générique par le bleu institutionnel EPI */
+    background: linear-gradient(135deg, var(--epi-blue), var(--epi-navy));
+}
+
+.badge-red {
+    /* Utilisation de tes couleurs EPI pour les alertes */
+    background: var(--epi-red-light);
+    color: var(--epi-red);
+}
+
+.nav-link.active {
+    /* Souligne l'identité de l'école dans la navigation */
+    background: var(--epi-blue-light);
+    color: var(--epi-blue);
+    border-left: 4px solid var(--epi-blue);
+}
+
+.main-content {
+    transition: margin-left var(--transition-normal);
+}
