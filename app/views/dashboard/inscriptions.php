@@ -1,6 +1,7 @@
 <?php
 /**
  * VUE : Nouvelle Inscription
+ * Fichier : app/views/dashboard/inscriptions.php
  */
 $admin_pseudo = $admin_pseudo ?? 'Admin';
 $error = $error ?? null;
@@ -14,9 +15,54 @@ $filieres = $filieres ?? []; // Liste des filières transmise par le contrôleur
     <title>EPI Gest - Nouvelle Inscription</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        /* Style personnalisé pour le conteneur du select et de la photo */
+        .custom-select-style {
+            width: 100%; 
+            padding: 0.875rem 1rem; 
+            border: 1px solid var(--border-color); 
+            border-radius: var(--radius-md); 
+            font-family: 'Inter'; 
+            background-color: white; 
+            outline: none;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: border-color 0.2s;
+        }
+        .custom-select-style:focus {
+            border-color: var(--primary-color);
+        }
+        .file-upload-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border-color);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            background: #f8fafc;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .file-upload-wrapper:hover {
+            background: #f1f5f9;
+            border-color: var(--primary-color);
+        }
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard-layout">
+        <!-- ===== SIDEBAR ===== -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo" id="sidebar-logo-toggle">
                 <img src="/assets/images/logo.jpg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
@@ -47,6 +93,7 @@ $filieres = $filieres ?? []; // Liste des filières transmise par le contrôleur
             </div>
         </aside>
 
+        <!-- ===== MAIN CONTENT ===== -->
         <main class="main-content">
             <header class="header">
                 <div class="greeting">
@@ -64,7 +111,8 @@ $filieres = $filieres ?? []; // Liste des filières transmise par le contrôleur
                         </div>
                     <?php endif; ?>
 
-                    <form action="/inscriptions" method="POST">
+                    <!-- CRUCIAL : Ajout de enctype pour autoriser le téléversement de la photo -->
+                    <form action="/inscriptions" method="POST" enctype="multipart/form-data">
                         <h3 style="margin-bottom:1.5rem;color:var(--text-main);font-family:'Outfit';font-size:1.25rem;display:flex;align-items:center;gap:0.5rem;">
                             <i class="ph-fill ph-student" style="color:var(--primary-color);"></i> Informations de l'étudiant
                         </h3>
@@ -89,7 +137,7 @@ $filieres = $filieres ?? []; // Liste des filières transmise par le contrôleur
                             
                             <div class="form-group">
                                 <label>Filière</label>
-                                <select name="filiere_id" required style="width: 100%; padding: 0.875rem 1rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); font-family: 'Inter'; background-color: white; outline: none;">
+                                <select name="filiere_id" required class="custom-select-style">
                                     <option value="" disabled selected>Choisir une filière...</option>
                                     <?php foreach ($filieres as $filiere): ?>
                                         <option value="<?= $filiere['id'] ?>"><?= htmlspecialchars($filiere['nom']) ?></option>
@@ -100,6 +148,25 @@ $filieres = $filieres ?? []; // Liste des filières transmise par le contrôleur
                             <div class="form-group">
                                 <label>Date de naissance</label>
                                 <input type="date" name="date_naissance" required>
+                            </div>
+
+                            <!-- NOUVEAU CHAMP : STATUT DE L'INSCRIPTION -->
+                            <div class="form-group">
+                                <label>Statut Initial du Dossier</label>
+                                <select name="statut" class="custom-select-style">
+                                    <option value="en attente" selected>En attente (Par défaut)</option>
+                                    <option value="Inscrit">Inscrit (Dossier Validé)</option>
+                                </select>
+                            </div>
+
+                            <!-- NOUVEAU CHAMP : PHOTO DE L'ÉTUDIANT -->
+                            <div class="form-group">
+                                <label>Photo d'identité (.png, .jpg)</label>
+                                <div class="file-upload-wrapper" id="upload-box">
+                                    <i class="ph ph-upload-simple" id="upload-icon" style="font-size: 1.25rem; margin-right: 0.5rem; color: var(--text-muted);"></i>
+                                    <span id="upload-text" style="font-size: 0.875rem; color: var(--text-muted); font-weight: 500;">Choisir une photo...</span>
+                                    <input type="file" name="photo" id="photo-input" accept="image/png, image/jpeg, image/jpg">
+                                </div>
                             </div>
                         </div>
 
@@ -132,5 +199,21 @@ $filieres = $filieres ?? []; // Liste des filières transmise par le contrôleur
         </main>
     </div>
     <script src="/assets/js/main.js"></script>
+
+    <!-- Petit script JS pour afficher le nom du fichier sélectionné à l'écran -->
+    <script>
+        document.getElementById('photo-input').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : "Choisir une photo...";
+            const uploadText = document.getElementById('upload-text');
+            const uploadIcon = document.getElementById('upload-icon');
+            
+            uploadText.innerText = fileName;
+            if (e.target.files[0]) {
+                uploadText.style.color = "var(--primary-color)";
+                uploadIcon.style.color = "var(--primary-color)";
+                uploadIcon.className = "ph-bold ph-check-circle";
+            }
+        });
+    </script>
 </body>
 </html>

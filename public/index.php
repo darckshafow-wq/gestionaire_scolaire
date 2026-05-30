@@ -23,22 +23,35 @@ require_once ROOT_PATH . '/core/Database.php';
 
 $router = new Router();
 
+// ===== ROUTES AUTHENTIFICATION =====
 $router->add('/', 'admin/AuthController@landing');
 $router->add('/login', 'admin/AuthController@login');
 $router->add('/signup', 'admin/AuthController@signup');
 $router->add('/logout', 'admin/AuthController@logout');
 
+// ===== ROUTES LOGICIEL (ADMIN & SYSTEME) =====
 $router->add('/dashboard', 'admin/DashboardController@index');
 $router->add('/calendrier', 'admin/CalendrierController@index');
 $router->add('/parametres', 'admin/ParametresController@parametres');
 
+// ===== ROUTES ÉTUDIANTS (STUDENT) =====
 $router->add('/etudiants', 'student/EtudiantsController@index');
 $router->add('/inscriptions', 'student/InscriptionController@index');
 $router->add('/etudiant_detail', 'student/EtudiantDetailController@index');
 
+/**
+ * NOUVELLE ROUTE : Changement de statut de l'étudiant ('Inscrit' / 'en attente')
+ * Pointe vers la méthode toggleStatut() qu'on a ajoutée dans EtudiantDetailController
+ */
+$router->add('/etudiant_toggle_statut', 'student/EtudiantDetailController@toggleStatut');
+// Route pour intercepter et sauvegarder les modifications du formulaire (Popup)
+$router->add('/modifier_etudiant_save', 'student/EtudiantDetailController@update');
+
+// ===== ROUTES FILIÈRES =====
 $router->add('/filieres', 'admin/FilieresController@index');
 $router->add('/filieres/create', 'admin/FilieresController@create');
 $router->add('/filiere_detail', 'admin/FilieresController@detail');
 $router->add('/filiere_delete', 'admin/FilieresController@delete');
 
+// ===== DÉCLENCHEMENT DE LA ROUTE =====
 $router->dispatch($_SERVER['REQUEST_URI']);

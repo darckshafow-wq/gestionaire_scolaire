@@ -116,7 +116,7 @@ $filieres = $filieres ?? [];
                             <th>Nom & Prénom</th>
                             <th>Filière</th> 
                             <th>Année Scolaire</th>
-                            <th>Tuteur</th>
+                            <th>Statut</th> <th>Tuteur</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -144,6 +144,27 @@ $filieres = $filieres ?? [];
                                         <?php endif; ?>
                                     </td>
                                     <td><?= htmlspecialchars($etudiant['annee_scolaire'] ?? 'N/A') ?></td>
+                                    
+                                    <td>
+                                        <form action="/etudiant_toggle_statut" method="POST" style="margin:0;">
+                                            <input type="hidden" name="id" value="<?= $etudiant['id'] ?>">
+                                            <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;" title="Cliquer pour basculer le statut">
+                                                <?php 
+                                                $statutDossier = trim($etudiant['statut'] ?? 'en attente');
+                                                if ($statutDossier === 'Inscrit'): 
+                                                ?>
+                                                    <span class="badge" style="display:inline-flex; align-items:center; gap:0.25rem; background:#dcfce7; color:#15803d; font-weight:600; padding:0.25rem 0.65rem; border-radius:6px; font-size:0.8rem;">
+                                                        <i class="ph-bold ph-check-circle" style="font-size:0.95rem;"></i> Inscrit
+                                                    </span>
+                                                <?php else: ?>
+                                                    <span class="badge" style="display:inline-flex; align-items:center; gap:0.25rem; background:#ffedd5; color:#c2410c; font-weight:600; padding:0.25rem 0.65rem; border-radius:6px; font-size:0.8rem;">
+                                                        <i class="ph-bold ph-clock" style="font-size:0.95rem;"></i> En attente
+                                                    </span>
+                                                <?php endif; ?>
+                                            </button>
+                                        </form>
+                                    </td>
+
                                     <td style="color: var(--text-muted);"><?= htmlspecialchars($etudiant['tuteur_nom'] ?? 'Non renseigné') ?></td>
                                     <td>
                                         <a href="/etudiant_detail?id=<?= $etudiant['id'] ?>" style="color: var(--primary-color); font-weight: 500; display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem 0.5rem; border-radius: 6px; transition: background 0.2s; text-decoration: none;">
@@ -154,7 +175,7 @@ $filieres = $filieres ?? [];
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
                                     <i class="ph ph-folder-open" style="font-size: 2rem; margin-bottom: 0.5rem; display: block; opacity: 0.5;"></i>
                                     Aucun étudiant trouvé.
                                 </td>
@@ -224,6 +245,13 @@ $filieres = $filieres ?? [];
             <?= htmlspecialchars($_SESSION['snackbar']) ?>
         </div>
     <?php unset($_SESSION['snackbar']); endif; ?>
+
+    <?php if (isset($_SESSION['snackbar_error'])): ?>
+        <div id="snackbar" class="snackbar show" style="background:#ef4444;">
+            <i class="ph-bold ph-warning-circle" style="font-size: 1.2rem; margin-right: 0.5rem; vertical-align: text-bottom;"></i>
+            <?= htmlspecialchars($_SESSION['snackbar_error']) ?>
+        </div>
+    <?php unset($_SESSION['snackbar_error']); endif; ?>
 
     <script src="/assets/js/main.js"></script>
 </body>
