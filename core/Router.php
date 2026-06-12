@@ -1,4 +1,12 @@
 <?php
+/**
+ * TODO:
+ * - Supporter les paramètres dynamiques (ex: /etudiant/{id})
+ * - Séparer les routes GET et POST
+ * - Ajouter une page 404 personnalisée au lieu d'un simple texte
+ * - Ajouter un middleware d'authentification
+ * - Créer une vue 404 dédiée (app/views/errors/404.php)
+ */
 
 class Router {
     protected $routes = [];
@@ -9,16 +17,23 @@ class Router {
 
     public function dispatch($url) {
         $url = parse_url($url, PHP_URL_PATH);
+        
         if (array_key_exists($url, $this->routes)) {
             $parts = explode('@', $this->routes[$url]);
-            $controllerName = $parts[0];
+            $controllerPath = $parts[0];
             $actionName = $parts[1];
 
-            require_once ROOT_PATH . '/app/controllers/' . $controllerName . '.php';
+            require_once ROOT_PATH . '/app/controllers/' . $controllerPath . '.php';
+            
+            // Extract the actual class name from the path (e.g. admin/DashboardController -> DashboardController)
+            $controllerName = basename($controllerPath);
             $controller = new $controllerName();
             $controller->$actionName();
         } else {
-            echo "404 Not Found";
+            http_response_code(404);
+            echo "<h1>404 - Page non trouvée</h1>";
+            echo "<p>La page demandée n'existe pas.</p>";
+            echo "<a href='/'>Retour à l'accueil</a>";
         }
     }
 }

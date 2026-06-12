@@ -1,0 +1,169 @@
+/* ====== TABS HORIZONTALES (REMPLACE LA COLONNE) ====== */
+.horizontal-tabs {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    padding-bottom: 0;
+}
+.tab-link {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.tab-link:hover {
+    color: var(--epi-blue);
+    background: #f8fafc;
+}
+.tab-link.active {
+    color: var(--epi-blue);
+    border-bottom-color: var(--epi-blue);
+    font-weight: 600;
+}
+
+/* ====== CONTENU ====== */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== CARDS PROFESSEURS ====== */
+.prof-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+.prof-card:hover {
+    box-shadow: 0 8px 20px rgba(37,99,235,.08);
+    transform: translateY(-2px);
+    border-color: #bfdbfe;
+}
+.prof-avatar {
+    width: 55px; height: 55px;
+    border-radius: 14px;
+    background: var(--epi-blue-light);
+    color: var(--epi-blue);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Outfit'; font-weight: 700; font-size: 1.4rem;
+    flex-shrink: 0;
+}
+.prof-info { flex: 1; min-width: 0; }
+.prof-info .name { font-weight: 600; font-size: 1.05rem; color: var(--text-main); }
+.prof-info .sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; }
+.prof-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.prof-meta span {
+    font-size: 0.78rem; padding: 0.3rem 0.75rem;
+    border-radius: 20px; background: #f8fafc;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    display: flex; align-items: center; gap: 0.3rem;
+}
+.prof-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+.btn-accept {
+    background: linear-gradient(135deg, var(--epi-blue), #1d4ed8);
+    color: white; border: none; cursor: pointer;
+    padding: 0.6rem 1.25rem; border-radius: var(--radius-md);
+    font-size: 0.85rem; font-weight: 600;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: opacity .2s;
+}
+.btn-accept:hover { opacity: 0.88; box-shadow: 0 4px 10px rgba(37,99,235,0.2); }
+.btn-reject {
+    background: #fee2e2; color: #dc2626; border: none; cursor: pointer;
+    padding: 0.6rem 1.25rem; border-radius: var(--radius-md);
+    font-size: 0.85rem; font-weight: 600;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: background .2s;
+}
+.btn-reject:hover { background: #fecaca; }
+.btn-detail {
+    background: white; color: var(--text-main); border: 1px solid var(--border-color);
+    padding: 0.6rem 1.25rem; border-radius: var(--radius-md);
+    font-size: 0.85rem; font-weight: 600; text-decoration: none;
+    display: flex; align-items: center; gap: 0.4rem;
+    transition: all .2s;
+}
+.btn-detail:hover { background: #f8fafc; border-color: #cbd5e1; }
+
+/* ====== STATS HEADER ====== */
+.stats-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-bottom: 2rem;
+}
+.stat-box {
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex; align-items: center; gap: 1.25rem;
+    background: white;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+.stat-box .icon-wrap {
+    width: 54px; height: 54px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; flex-shrink: 0;
+}
+.stat-box .value { font-size: 2rem; font-weight: 700; font-family: 'Outfit'; line-height: 1; }
+.stat-box .label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 4rem 1rem; color: var(--text-muted); background: white; border-radius: var(--radius-lg); border: 1px dashed var(--border-color); }
+.empty-state i { font-size: 3.5rem; display: block; margin-bottom: 1rem; opacity: 0.25; }
+.empty-state p { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--text-main); }
+
+/* Section title */
+.section-heading {
+    font-family: 'Outfit'; font-size: 1.25rem; font-weight: 600;
+    color: var(--text-main); margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 0.6rem;
+}
+
+/* Dashboard Specific */
+.dashboard-header-card {
+    background: linear-gradient(135deg, var(--epi-blue), #1d4ed8);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 10px 30px rgba(37,99,235,0.15);
+}
+.dashboard-header-card h1 { font-family: 'Outfit'; font-size: 2rem; margin-bottom: 0.5rem; }
+.dashboard-header-card p { opacity: 0.85; font-size: 1rem; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+.kpi-card {
+    background: white; border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg); padding: 1.75rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.kpi-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.kpi-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; flex-shrink: 0;
+}
+.kpi-val { font-size: 2.2rem; font-weight: 700; font-family: 'Outfit'; line-height: 1.2; }
+.kpi-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.2rem; }

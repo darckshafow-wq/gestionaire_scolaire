@@ -1,4 +1,10 @@
 <?php
+/**
+ * TODO:
+ * - Ajouter un pattern Singleton pour éviter les connexions multiples
+ * - Ajouter des méthodes utilitaires (query, prepare, etc.)
+ * - En production, logger l'erreur au lieu de l'afficher
+ */
 
 class Database {
     private $host = DB_HOST;
@@ -13,7 +19,11 @@ class Database {
             $this->connection = new PDO($dsn, $this->user, $this->pass);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            die("Erreur de connexion à la base de données : " . $e->getMessage());
         }
+    }
+
+    public function getConnection() {
+        return $this->connection;
     }
 }
