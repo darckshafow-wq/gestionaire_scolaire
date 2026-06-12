@@ -194,4 +194,22 @@ class Etudiant
         
         return $stmt->execute();
     }
+
+    public function findByEmail($email)
+    {
+        $query = "SELECT * FROM etudiants WHERE email = :email LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function validerInscription($id, $password_hash)
+    {
+        $query = "UPDATE etudiants SET statut = 'inscrit', password = :password WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':password', $password_hash);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }

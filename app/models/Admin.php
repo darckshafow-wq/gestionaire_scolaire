@@ -26,24 +26,26 @@ class Admin
 
     public function create($data)
     {
-        $query = "INSERT INTO administrateurs (pseudo, email, password)
-                  VALUES (:pseudo, :email, :password)";
+        $query = "INSERT INTO administrateurs (pseudo, email, password, role)
+                  VALUES (:pseudo, :email, :password, :role)";
         $stmt = $this->db->prepare($query);
 
         $pseudo = htmlspecialchars(strip_tags($data['pseudo']));
         $email = trim($data['email']);
         $password_hashed = password_hash($data['password'], PASSWORD_BCRYPT);
+        $role = isset($data['role']) ? $data['role'] : 'secretaire';
 
         $stmt->bindParam(':pseudo', $pseudo);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password_hashed);
+        $stmt->bindParam(':role', $role);
 
         return $stmt->execute();
     }
 
     public function getAll()
     {
-        $query = "SELECT id, pseudo, email, created_at FROM administrateurs ORDER BY created_at DESC";
+        $query = "SELECT id, pseudo, email, role, created_at FROM administrateurs ORDER BY created_at DESC";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 

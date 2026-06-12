@@ -28,7 +28,7 @@ class AuthController extends Controller
      */
     public function landing()
     {
-        $this->view('landing');
+        $this->view('home');
     }
 
     /**
@@ -64,9 +64,14 @@ class AuthController extends Controller
                     $_SESSION['admin_id'] = $admin['id'];
                     $_SESSION['admin_email'] = $admin['email'];
                     $_SESSION['admin_pseudo'] = $admin['pseudo'];
+                    $_SESSION['admin_role'] = $admin['role'] ?? 'secretaire';
                     $_SESSION['snackbar'] = "Connexion réussie. Bienvenue 👋 !";
 
-                    header('Location: /dashboard');
+                    if ($_SESSION['admin_role'] === 'dg') {
+                        header('Location: /dg_dashboard');
+                    } else {
+                        header('Location: /dashboard');
+                    }
                     exit();
                 } else {
                     // ❌ Identifiants incorrects

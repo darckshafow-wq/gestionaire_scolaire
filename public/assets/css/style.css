@@ -20,6 +20,8 @@
     --epi-red: #cc0000;
     --epi-red-light: #fde8e8;
     --epi-navy: #1a237e;
+    --epi-gold: #d4af37;
+    --epi-gold-light: #fbf5e2;
 
     /* Shadows & Effects */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -79,7 +81,7 @@ a {
     align-items: center;
     justify-content: center;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-indigo));
+    background: linear-gradient(135deg, var(--epi-blue), var(--epi-navy));
     color: white;
     border: none;
     border-radius: var(--radius-md);
@@ -95,7 +97,7 @@ a {
 .btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
-    background: linear-gradient(135deg, var(--primary-hover), #4338ca);
+    background: linear-gradient(135deg, var(--epi-blue-hover), var(--epi-blue));
 }
 
 .btn:active {
@@ -309,7 +311,8 @@ a {
 }
 
 .sidebar-logo span {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-indigo));
+    background: linear-gradient(135deg, var(--epi-blue), var(--epi-gold));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -429,7 +432,7 @@ a {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-sky), var(--primary-color));
+    background: linear-gradient(135deg, var(--epi-gold), var(--epi-blue));
     color: white;
     display: flex;
     align-items: center;
@@ -449,7 +452,7 @@ a {
 }
 
 .card {
-    background: linear-gradient(135deg, var(--accent-indigo), #3730a3);
+    background: linear-gradient(135deg, var(--epi-blue), var(--epi-navy));
     border-radius: var(--radius-xl);
     padding: 2rem;
     color: white;
@@ -465,7 +468,7 @@ a {
 }
 
 .card.card-alt {
-    background: linear-gradient(135deg, var(--accent-sky), var(--primary-color));
+    background: linear-gradient(135deg, var(--epi-gold), #b89329);
 }
 
 .card.card-light {
@@ -750,7 +753,7 @@ td {
 /* Remplace les couleurs "Primary" dans tes composants clés */
 .btn {
     /* Remplace le dégradé bleu générique par le bleu institutionnel EPI */
-    background: linear-gradient(135deg, var(--epi-blue), var(--epi-navy));
+    background: linear-gradient(135deg, var(--epi-blue), var(--epi-gold));
 }
 
 .badge-red {
@@ -768,4 +771,48 @@ td {
 
 .main-content {
     transition: margin-left var(--transition-normal);
+}
+
+.form-group label,
+.info-label {
+    font-family: 'Inter', sans-serif;
+    /* Force l'utilisation de la police système moderne */
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #334155;
+    /* Gris foncé élégant */
+    margin-bottom: 0.5rem;
+    display: block;
+    letter-spacing: 0.02em;
+}
+
+.info-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #0f172a;
+    /* Noir doux */
+}
+
+/* Cible spécifiquement le formulaire d'inscription (ID connu) pour le design très contrasté */
+#inscriptionForm {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+}
+
+#inscriptionForm .form-control {
+    border: 1px solid #cbd5e1;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+#inscriptionForm .form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    /* Utilisation de la couleur d'accent (bleu EPI) */
+    box-shadow: 0 0 0 3px rgba(0, 119, 190, 0.1);
 }

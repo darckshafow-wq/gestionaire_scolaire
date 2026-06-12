@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS administrateurs (
     email VARCHAR(255) NOT NULL UNIQUE,
     pseudo VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    role ENUM('secretaire', 'dg') NOT NULL DEFAULT 'secretaire',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -45,7 +46,9 @@ CREATE TABLE IF NOT EXISTS etudiants (
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
     photo_url VARCHAR(255) DEFAULT NULL,
+    document_url VARCHAR(255) DEFAULT NULL,
     email VARCHAR(255) DEFAULT NULL,
+    password VARCHAR(255) DEFAULT NULL,
     tuteur_nom VARCHAR(100) NOT NULL,
     tuteur_contact VARCHAR(50) NOT NULL,
     date_naissance DATE NOT NULL,
@@ -93,5 +96,65 @@ INSERT INTO filieres (code, nom, description, duree_annees, niveau, statut) VALU
 --  DONNÉES DE DÉMARRAGE (Admin par défaut)
 --  Email: admin@epi.edu.ci  |  Mot de passe: password123
 -- ============================================================
-INSERT INTO administrateurs (email, pseudo, password) VALUES
-('admin@epi.edu.ci', 'SuperAdmin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+INSERT INTO administrateurs (email, pseudo, password, role) VALUES
+('admin@epi.edu.ci', 'SuperAdmin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'dg'),
+('secretaire@epi.edu.ci', 'Secrétaire', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'secretaire');
+
+-- ============================================================
+--  TABLE : matieres
+-- ============================================================
+CREATE TABLE IF NOT EXISTS matieres (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    filiere_id INT NOT NULL,
+    nom VARCHAR(150) NOT NULL,
+    volume_horaire INT NOT NULL DEFAULT 20,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (filiere_id) REFERENCES filieres(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+--  TABLE : professeurs
+-- ============================================================
+CREATE TABLE IF NOT EXISTS professeurs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    email VARCHAR(255) DEFAULT NULL,
+    password VARCHAR(255) DEFAULT NULL,
+    telephone VARCHAR(50) NOT NULL,
+    specialite VARCHAR(150) DEFAULT NULL,
+    accord_dg BOOLEAN NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+--  TABLE : salles
+-- ============================================================
+CREATE TABLE IF NOT EXISTS salles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL UNIQUE,
+    capacite INT NOT NULL DEFAULT 30,
+    etat_dispo ENUM('Disponible', 'Indisponible', 'En maintenance') NOT NULL DEFAULT 'Disponible',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ============================================================
+--  TABLE : planning_cours
+-- ============================================================
+CREATE TABLE IF NOT EXISTS planning_cours (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    filiere_id INT NOT NULL,
+    matiere_id INT NOT NULL,
+    professeur_id INT NOT NULL,
+    salle_id INT NOT NULL,
+    date_cours DATE NOT NULL,
+    heure_debut TIME NOT NULL,
+    heure_fin TIME NOT NULL,
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (filiere_id) REFERENCES filieres(id) ON DELETE CASCADE,
+    FOREIGN KEY (matiere_id) REFERENCES matieres(id) ON DELETE CASCADE,
+    FOREIGN KEY (professeur_id) REFERENCES professeurs(id) ON DELETE CASCADE,
+    FOREIGN KEY (salle_id) REFERENCES salles(id) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES administrateurs(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

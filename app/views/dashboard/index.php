@@ -15,7 +15,7 @@ $filieres = $filieres ?? [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduGest Pro - Dashboard</title>
+    <title>EPI MANAGEMENT - Dashboard</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -26,7 +26,7 @@ $filieres = $filieres ?? [];
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-logo" id="sidebar-logo-toggle">
                 <img src="/assets/images/logo.jpg" alt="EPI Logo" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
-                <span class="brand-font">EPI Gest</span>
+                <span class="brand-font">EPI MANAGEMENT</span>
             </div>
 
             <div class="sidebar-section-title">Main</div>
